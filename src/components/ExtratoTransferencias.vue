@@ -1,7 +1,8 @@
 <template>
-    <div>
-      <h2>Extrato de Transferências</h2>
-      <table>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Extrato de Transferências</h2>
+    <div class="card p-4 shadow">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Conta Origem</th>
@@ -24,43 +25,49 @@
         </tbody>
       </table>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        transferencias: []
-      };
-    },
-    async created() {
-      await this.carregarTransferencias();
-    },
-    methods: {
-      async carregarTransferencias() {
-        try {
-          const response = await this.$axios.get('/transferencias');
-          this.transferencias = response.data;
-        } catch (error) {
-          console.error('Erro ao carregar transferências:', error);
-        }
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      transferencias: []
+    };
+  },
+  async created() {
+    await this.carregarTransferencias();
+  },
+  methods: {
+    async carregarTransferencias() {
+      try {
+        const response = await this.$axios.get('/transferencias');
+        this.transferencias = response.data;
+      } catch (error) {
+        console.error('Erro ao carregar transferências:', error);
       }
     }
-  };
-  </script>
-  
-  <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
   }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  </style>
+};
+</script>
+
+<style scoped>
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+</style>
