@@ -42,16 +42,16 @@
         try {
           await this.$axios.post('/transferencias', this.transferencia);
           alert('Transferência agendada com sucesso!');
-          this.$emit('transferencia-agendada'); // Emitir evento para atualizar o extrato
+          this.$emit('transferencia-agendada'); 
         } catch (error) {
           if (error.response) {
-            // O servidor respondeu com um status fora do intervalo 2xx
+            
             this.mensagemErro = 'Erro ao agendar transferência: ' + error.response.data;
           } else if (error.request) {
-            // A requisição foi feita, mas não houve resposta do servidor
+            
             this.mensagemErro = 'Erro de conexão: O servidor não respondeu.';
           } else {
-            // Algo aconteceu durante a configuração da requisição
+            
             this.mensagemErro = 'Erro ao configurar a requisição: ' + error.message;
           }
           console.error('Erro completo:', error);
